@@ -12,6 +12,7 @@ class EditorStyle {
     required this.cursorColor,
     required this.dragHandleColor,
     required this.selectionColor,
+    this.searchHighlightColor = const Color.fromARGB(100, 255, 200, 0),
     required this.textStyleConfiguration,
     required this.textSpanDecorator,
     this.textSpanOverlayBuilder,
@@ -49,6 +50,9 @@ class EditorStyle {
 
   // The selection color
   final Color selectionColor;
+
+  // The search/find highlight color
+  final Color searchHighlightColor;
 
   // Customize the text style of the editor.
   //
@@ -109,6 +113,7 @@ class EditorStyle {
     EdgeInsets? padding,
     Color? cursorColor,
     Color? selectionColor,
+    Color? searchHighlightColor,
     TextStyleConfiguration? textStyleConfiguration,
     TextSpanDecoratorForAttribute? textSpanDecorator,
     this.textSpanOverlayBuilder,
@@ -120,6 +125,8 @@ class EditorStyle {
         cursorColor = cursorColor ?? const Color(0xFF00BCF0),
         selectionColor =
             selectionColor ?? const Color.fromARGB(53, 111, 201, 231),
+        searchHighlightColor =
+            searchHighlightColor ?? const Color.fromARGB(100, 255, 200, 0),
         textStyleConfiguration = textStyleConfiguration ??
             const TextStyleConfiguration(
               text: TextStyle(fontSize: 16, color: Colors.black),
@@ -142,6 +149,7 @@ class EditorStyle {
     Color? cursorColor,
     Color? dragHandleColor,
     Color? selectionColor,
+    Color? searchHighlightColor,
     TextStyleConfiguration? textStyleConfiguration,
     TextSpanDecoratorForAttribute? textSpanDecorator,
     this.textSpanOverlayBuilder,
@@ -163,6 +171,8 @@ class EditorStyle {
         dragHandleColor = dragHandleColor ?? const Color(0xFF00BCF0),
         selectionColor =
             selectionColor ?? const Color.fromARGB(53, 111, 201, 231),
+        searchHighlightColor =
+            searchHighlightColor ?? const Color.fromARGB(100, 255, 200, 0),
         textStyleConfiguration = textStyleConfiguration ??
             const TextStyleConfiguration(
               text: TextStyle(fontSize: 16, color: Colors.black),
@@ -175,6 +185,7 @@ class EditorStyle {
     Color? cursorColor,
     Color? dragHandleColor,
     Color? selectionColor,
+    Color? searchHighlightColor,
     TextStyleConfiguration? textStyleConfiguration,
     TextSpanDecoratorForAttribute? textSpanDecorator,
     AppFlowyTextSpanOverlayBuilder? textSpanOverlayBuilder,
@@ -197,6 +208,8 @@ class EditorStyle {
       cursorColor: cursorColor ?? this.cursorColor,
       dragHandleColor: dragHandleColor ?? this.dragHandleColor,
       selectionColor: selectionColor ?? this.selectionColor,
+      searchHighlightColor:
+          searchHighlightColor ?? this.searchHighlightColor,
       textStyleConfiguration:
           textStyleConfiguration ?? this.textStyleConfiguration,
       textSpanDecorator: textSpanDecorator ?? this.textSpanDecorator,

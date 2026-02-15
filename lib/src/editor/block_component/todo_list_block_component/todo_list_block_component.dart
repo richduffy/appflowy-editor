@@ -82,6 +82,7 @@ class TodoListBlockComponentBuilder extends BlockComponentBuilder {
         state,
       ),
       toggleChildrenTriggers: toggleChildrenTriggers,
+      contentWrapper: blockComponentContext.wrapper,
     );
   }
 
@@ -97,6 +98,7 @@ class TodoListBlockComponentWidget extends BlockComponentStatefulWidget {
     super.actionBuilder,
     super.actionTrailingBuilder,
     super.configuration = const BlockComponentConfiguration(),
+    super.contentWrapper,
     this.textStyleBuilder,
     this.iconBuilder,
     this.toggleChildrenTriggers,
@@ -190,6 +192,7 @@ class _TodoListBlockComponentWidgetState
               ),
               cursorColor: editorState.editorStyle.cursorColor,
               selectionColor: editorState.editorStyle.selectionColor,
+              searchHighlightColor: editorState.editorStyle.searchHighlightColor,
               cursorWidth: editorState.editorStyle.cursorWidth,
             ),
           ),
@@ -210,6 +213,7 @@ class _TodoListBlockComponentWidgetState
       listenable: editorState.selectionNotifier,
       remoteSelection: editorState.remoteSelections,
       blockColor: editorState.editorStyle.selectionColor,
+      searchHighlightColor: editorState.editorStyle.searchHighlightColor,
       supportTypes: const [
         BlockSelectionType.block,
       ],
@@ -221,6 +225,7 @@ class _TodoListBlockComponentWidgetState
         node: node,
         actionBuilder: widget.actionBuilder!,
         actionTrailingBuilder: widget.actionTrailingBuilder,
+        contentWrapper: widget.contentWrapper,
         child: child,
       );
     }

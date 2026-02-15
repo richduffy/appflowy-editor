@@ -69,10 +69,11 @@ class PageBlockComponent extends BlockComponentStatelessWidget {
                 if (header != null) header!,
                 ...items.map(
                   (e) {
-                    Widget child = editorState.renderer.build(context, e);
-                    if (wrapper != null) {
-                      child = wrapper!(context, node: e, child: child);
-                    }
+                    final child = editorState.renderer.build(
+                      context,
+                      e,
+                      wrapper: wrapper,
+                    );
 
                     return Container(
                       constraints: BoxConstraints(
@@ -114,13 +115,11 @@ class PageBlockComponent extends BlockComponentStatelessWidget {
           }
 
           final node = items[index - (header != null ? 1 : 0)];
-          Widget child = editorState.renderer.build(
+          final child = editorState.renderer.build(
             context,
             node,
+            wrapper: wrapper,
           );
-          if (wrapper != null) {
-            child = wrapper!(context, node: node, child: child);
-          }
 
           return Center(
             child: Container(

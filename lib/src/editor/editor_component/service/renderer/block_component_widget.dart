@@ -8,6 +8,8 @@ mixin BlockComponentWidget on Widget {
   BlockComponentActionBuilder? get actionBuilder;
   BlockComponentActionTrailingBuilder? get actionTrailingBuilder;
   bool get showActions;
+  /// Wrapper applied only to block content (excludes actions like drag handle)
+  BlockContentWrapper? get contentWrapper;
 }
 
 class BlockComponentStatelessWidget extends StatelessWidget
@@ -19,6 +21,7 @@ class BlockComponentStatelessWidget extends StatelessWidget
     this.showActions = false,
     this.actionBuilder,
     this.actionTrailingBuilder,
+    this.contentWrapper,
   });
 
   @override
@@ -35,6 +38,9 @@ class BlockComponentStatelessWidget extends StatelessWidget
 
   @override
   final BlockComponentActionTrailingBuilder? actionTrailingBuilder;
+
+  @override
+  final BlockContentWrapper? contentWrapper;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +57,7 @@ class BlockComponentStatefulWidget extends StatefulWidget
     this.showActions = false,
     this.actionBuilder,
     this.actionTrailingBuilder,
+    this.contentWrapper,
   });
 
   @override
@@ -67,6 +74,9 @@ class BlockComponentStatefulWidget extends StatefulWidget
 
   @override
   final BlockComponentConfiguration configuration;
+
+  @override
+  final BlockContentWrapper? contentWrapper;
 
   @override
   State<BlockComponentStatefulWidget> createState() =>

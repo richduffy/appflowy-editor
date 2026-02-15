@@ -43,6 +43,7 @@ class AppFlowyRichText extends StatefulWidget {
     this.textAlign,
     this.cursorColor = const Color.fromARGB(255, 0, 0, 0),
     this.selectionColor = const Color.fromARGB(53, 111, 201, 231),
+    this.searchHighlightColor = const Color.fromARGB(100, 255, 200, 0),
     this.autoCompleteTextProvider,
     required this.delegate,
     required this.node,
@@ -98,6 +99,7 @@ class AppFlowyRichText extends StatefulWidget {
 
   final Color cursorColor;
   final Color selectionColor;
+  final Color searchHighlightColor;
 
   @override
   State<AppFlowyRichText> createState() => _AppFlowyRichTextState();
@@ -140,10 +142,13 @@ class _AppFlowyRichTextState extends State<AppFlowyRichText>
 
   @override
   Widget build(BuildContext context) {
+    final gutterInset = widget.editorState.editorStyle.textSpanOverlayBuilder != null
+        ? const EdgeInsets.only(right: 22)
+        : EdgeInsets.zero;
     Widget child = Stack(
       children: [
-        _buildPlaceholderText(context),
-        _buildRichText(context),
+        Padding(padding: gutterInset, child: _buildPlaceholderText(context)),
+        Padding(padding: gutterInset, child: _buildRichText(context)),
         ..._buildRichTextOverlay(context),
       ],
     );
@@ -165,6 +170,7 @@ class _AppFlowyRichTextState extends State<AppFlowyRichText>
       node: widget.node,
       cursorColor: widget.cursorColor,
       selectionColor: widget.selectionColor,
+      searchHighlightColor: widget.searchHighlightColor,
       child: MouseRegion(
         cursor: SystemMouseCursors.text,
         child: child,

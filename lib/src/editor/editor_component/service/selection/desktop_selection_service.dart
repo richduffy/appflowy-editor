@@ -77,11 +77,12 @@ class _DesktopSelectionServiceWidgetState
     super.didChangeMetrics();
 
     // Need to refresh the selection when the metrics changed.
-    if (currentSelection.value != null) {
+    final selection = currentSelection.value;
+    if (selection != null) {
       Debounce.debounce(
         'didChangeMetrics - update selection ',
         const Duration(milliseconds: 100),
-        () => updateSelection(currentSelection.value!),
+        () => updateSelection(selection),
       );
     }
   }

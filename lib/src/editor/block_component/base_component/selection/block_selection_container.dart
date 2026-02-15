@@ -11,6 +11,7 @@ class BlockSelectionContainer extends StatelessWidget {
     this.remoteSelection,
     this.cursorColor = Colors.black,
     this.selectionColor = Colors.blue,
+    this.searchHighlightColor = const Color.fromARGB(100, 255, 200, 0),
     this.blockColor = Colors.blue,
     this.supportTypes = const [
       BlockSelectionType.cursor,
@@ -35,6 +36,9 @@ class BlockSelectionContainer extends StatelessWidget {
   // the color of the selection
   final Color selectionColor;
 
+  // the color of the search/find highlight
+  final Color searchHighlightColor;
+
   // the color of the background of the block
   final Color blockColor;
 
@@ -56,6 +60,7 @@ class BlockSelectionContainer extends StatelessWidget {
       listenable: listenable,
       cursorColor: cursorColor,
       selectionColor: selectionColor,
+      searchHighlightColor: searchHighlightColor,
       blockColor: blockColor,
       supportTypes: supportTypes
           .where(
@@ -106,6 +111,7 @@ class BlockSelectionContainer extends StatelessWidget {
             listenable: listenable,
             cursorColor: cursorColor,
             selectionColor: selectionColor,
+            searchHighlightColor: searchHighlightColor,
             blockColor: blockColor,
             supportTypes: const [BlockSelectionType.cursor],
           ),

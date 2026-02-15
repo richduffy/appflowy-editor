@@ -53,6 +53,7 @@ class DividerBlockComponentBuilder extends BlockComponentBuilder {
         blockComponentContext,
         state,
       ),
+      contentWrapper: blockComponentContext.wrapper,
     );
   }
 
@@ -68,6 +69,7 @@ class DividerBlockComponentWidget extends BlockComponentStatefulWidget {
     super.actionBuilder,
     super.actionTrailingBuilder,
     super.configuration = const BlockComponentConfiguration(),
+    super.contentWrapper,
     this.lineColor = Colors.grey,
     this.height = 10,
     this.wrapper,
@@ -122,6 +124,7 @@ class _DividerBlockComponentWidgetState
       blockColor: editorState.editorStyle.selectionColor,
       cursorColor: editorState.editorStyle.cursorColor,
       selectionColor: editorState.editorStyle.selectionColor,
+      searchHighlightColor: editorState.editorStyle.searchHighlightColor,
       supportTypes: const [
         BlockSelectionType.block,
         BlockSelectionType.cursor,
@@ -135,6 +138,7 @@ class _DividerBlockComponentWidgetState
         node: node,
         actionBuilder: widget.actionBuilder!,
         actionTrailingBuilder: widget.actionTrailingBuilder,
+        contentWrapper: widget.contentWrapper,
         child: child,
       );
     }

@@ -61,6 +61,7 @@ class ParagraphBlockComponentBuilder extends BlockComponentBuilder {
         blockComponentContext,
         state,
       ),
+      contentWrapper: blockComponentContext.wrapper,
     );
   }
 
@@ -76,6 +77,7 @@ class ParagraphBlockComponentWidget extends BlockComponentStatefulWidget {
     super.actionBuilder,
     super.actionTrailingBuilder,
     super.configuration = const BlockComponentConfiguration(),
+    super.contentWrapper,
     this.showPlaceholder,
   });
 
@@ -181,6 +183,7 @@ class _ParagraphBlockComponentWidgetState
             textDirection: textDirection,
             cursorColor: editorState.editorStyle.cursorColor,
             selectionColor: editorState.editorStyle.selectionColor,
+            searchHighlightColor: editorState.editorStyle.searchHighlightColor,
             cursorWidth: editorState.editorStyle.cursorWidth,
           ),
         ],
@@ -200,6 +203,7 @@ class _ParagraphBlockComponentWidgetState
       listenable: editorState.selectionNotifier,
       remoteSelection: editorState.remoteSelections,
       blockColor: editorState.editorStyle.selectionColor,
+      searchHighlightColor: editorState.editorStyle.searchHighlightColor,
       supportTypes: const [
         BlockSelectionType.block,
       ],
@@ -211,6 +215,7 @@ class _ParagraphBlockComponentWidgetState
         node: node,
         actionBuilder: widget.actionBuilder!,
         actionTrailingBuilder: widget.actionTrailingBuilder,
+        contentWrapper: widget.contentWrapper,
         child: child,
       );
     }

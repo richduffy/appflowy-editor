@@ -67,6 +67,7 @@ class HeadingBlockComponentBuilder extends BlockComponentBuilder {
         blockComponentContext,
         state,
       ),
+      contentWrapper: blockComponentContext.wrapper,
     );
   }
 }
@@ -79,6 +80,7 @@ class HeadingBlockComponentWidget extends BlockComponentStatefulWidget {
     super.actionBuilder,
     super.actionTrailingBuilder,
     super.configuration = const BlockComponentConfiguration(),
+    super.contentWrapper,
     this.textStyleBuilder,
   });
 
@@ -168,6 +170,7 @@ class _HeadingBlockComponentWidgetState
               textDirection: textDirection,
               cursorColor: editorState.editorStyle.cursorColor,
               selectionColor: editorState.editorStyle.selectionColor,
+              searchHighlightColor: editorState.editorStyle.searchHighlightColor,
               cursorWidth: editorState.editorStyle.cursorWidth,
             ),
           ),
@@ -182,6 +185,7 @@ class _HeadingBlockComponentWidgetState
       listenable: editorState.selectionNotifier,
       remoteSelection: editorState.remoteSelections,
       blockColor: editorState.editorStyle.selectionColor,
+      searchHighlightColor: editorState.editorStyle.searchHighlightColor,
       supportTypes: const [
         BlockSelectionType.block,
       ],
@@ -199,6 +203,7 @@ class _HeadingBlockComponentWidgetState
         node: node,
         actionBuilder: widget.actionBuilder!,
         actionTrailingBuilder: widget.actionTrailingBuilder,
+        contentWrapper: widget.contentWrapper,
         child: child,
       );
     }

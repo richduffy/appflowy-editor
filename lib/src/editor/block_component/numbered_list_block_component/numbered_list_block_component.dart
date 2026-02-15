@@ -72,6 +72,7 @@ class NumberedListBlockComponentBuilder extends BlockComponentBuilder {
         blockComponentContext,
         state,
       ),
+      contentWrapper: blockComponentContext.wrapper,
     );
   }
 
@@ -87,6 +88,7 @@ class NumberedListBlockComponentWidget extends BlockComponentStatefulWidget {
     super.actionBuilder,
     super.actionTrailingBuilder,
     super.configuration = const BlockComponentConfiguration(),
+    super.contentWrapper,
     this.iconBuilder,
   });
 
@@ -171,6 +173,7 @@ class _NumberedListBlockComponentWidgetState
               textDirection: textDirection,
               cursorColor: editorState.editorStyle.cursorColor,
               selectionColor: editorState.editorStyle.selectionColor,
+              searchHighlightColor: editorState.editorStyle.searchHighlightColor,
               cursorWidth: editorState.editorStyle.cursorWidth,
             ),
           ),
@@ -191,6 +194,7 @@ class _NumberedListBlockComponentWidgetState
       listenable: editorState.selectionNotifier,
       remoteSelection: editorState.remoteSelections,
       blockColor: editorState.editorStyle.selectionColor,
+      searchHighlightColor: editorState.editorStyle.searchHighlightColor,
       supportTypes: const [
         BlockSelectionType.block,
       ],
@@ -202,6 +206,7 @@ class _NumberedListBlockComponentWidgetState
         node: node,
         actionBuilder: widget.actionBuilder!,
         actionTrailingBuilder: widget.actionTrailingBuilder,
+        contentWrapper: widget.contentWrapper,
         child: child,
       );
     }

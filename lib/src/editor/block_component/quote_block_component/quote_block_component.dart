@@ -59,6 +59,7 @@ class QuoteBlockComponentBuilder extends BlockComponentBuilder {
         blockComponentContext,
         state,
       ),
+      contentWrapper: blockComponentContext.wrapper,
     );
   }
 
@@ -74,6 +75,7 @@ class QuoteBlockComponentWidget extends BlockComponentStatefulWidget {
     super.actionBuilder,
     super.actionTrailingBuilder,
     super.configuration = const BlockComponentConfiguration(),
+    super.contentWrapper,
     this.iconBuilder,
   });
 
@@ -149,6 +151,7 @@ class _QuoteBlockComponentWidgetState extends State<QuoteBlockComponentWidget>
                 textDirection: textDirection,
                 cursorColor: editorState.editorStyle.cursorColor,
                 selectionColor: editorState.editorStyle.selectionColor,
+                searchHighlightColor: editorState.editorStyle.searchHighlightColor,
                 cursorWidth: editorState.editorStyle.cursorWidth,
               ),
             ),
@@ -170,6 +173,7 @@ class _QuoteBlockComponentWidgetState extends State<QuoteBlockComponentWidget>
       listenable: editorState.selectionNotifier,
       remoteSelection: editorState.remoteSelections,
       blockColor: editorState.editorStyle.selectionColor,
+      searchHighlightColor: editorState.editorStyle.searchHighlightColor,
       supportTypes: const [
         BlockSelectionType.block,
       ],
@@ -181,6 +185,7 @@ class _QuoteBlockComponentWidgetState extends State<QuoteBlockComponentWidget>
         node: node,
         actionBuilder: widget.actionBuilder!,
         actionTrailingBuilder: widget.actionTrailingBuilder,
+        contentWrapper: widget.contentWrapper,
         child: child,
       );
     }

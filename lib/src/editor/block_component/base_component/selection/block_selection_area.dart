@@ -24,6 +24,7 @@ class BlockSelectionArea extends StatefulWidget {
     required this.listenable,
     required this.cursorColor,
     required this.selectionColor,
+    required this.searchHighlightColor,
     required this.blockColor,
     this.supportTypes = const [
       BlockSelectionType.cursor,
@@ -42,6 +43,9 @@ class BlockSelectionArea extends StatefulWidget {
 
   // the color of the selection
   final Color selectionColor;
+
+  // the color of the search/find highlight
+  final Color searchHighlightColor;
 
   final Color blockColor;
 
@@ -104,27 +108,9 @@ class _BlockSelectionAreaState extends State<BlockSelectionArea> {
 
         final editorState = context.read<EditorState>();
         if (editorState.selectionType == SelectionType.block) {
-          if (!widget.supportTypes.contains(BlockSelectionType.block) ||
-              !path.inSelection(selection, isSameDepth: true) ||
-              prevBlockRect == null) {
-            return sizedBox;
-          }
-          final builder = editorState.service.rendererService
-              .blockComponentBuilder(widget.node.type);
-          final padding = builder?.configuration.blockSelectionAreaMargin(
-            widget.node,
-          );
-
-          return Positioned.fromRect(
-            rect: prevBlockRect!,
-            child: Container(
-              margin: padding,
-              decoration: BoxDecoration(
-                color: widget.blockColor,
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-          );
+          // Block selection is handled externally (e.g. by a block wrapper).
+          // Don't render a background highlight or text selection here.
+          return sizedBox;
         }
         // show the cursor when the selection is collapsed
         else if (selection.isCollapsed) {
@@ -158,9 +144,17 @@ class _BlockSelectionAreaState extends State<BlockSelectionArea> {
             return sizedBox;
           }
 
+          // Use search highlight color when the selection reason is searchHighlight
+          final editorState = context.read<EditorState>();
+          final isSearchHighlight = editorState.selectionUpdateReason ==
+              SelectionUpdateReason.searchHighlight;
+          final colorToUse = isSearchHighlight
+              ? widget.searchHighlightColor
+              : widget.selectionColor;
+
           return SelectionAreaPaint(
             rects: prevSelectionRects!,
-            selectionColor: widget.selectionColor,
+            selectionColor: colorToUse,
           );
         }
       }),

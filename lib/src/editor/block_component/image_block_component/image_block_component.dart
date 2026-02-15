@@ -84,6 +84,7 @@ class ImageBlockComponentBuilder extends BlockComponentBuilder {
       ),
       showMenu: showMenu,
       menuBuilder: menuBuilder,
+      contentWrapper: blockComponentContext.wrapper,
     );
   }
 
@@ -100,6 +101,7 @@ class ImageBlockComponentWidget extends BlockComponentStatefulWidget {
     super.actionBuilder,
     super.actionTrailingBuilder,
     super.configuration = const BlockComponentConfiguration(),
+    super.contentWrapper,
     this.showMenu = false,
     this.menuBuilder,
   });
@@ -179,6 +181,7 @@ class ImageBlockComponentWidgetState extends State<ImageBlockComponentWidget>
       listenable: editorState.selectionNotifier,
       remoteSelection: editorState.remoteSelections,
       blockColor: editorState.editorStyle.selectionColor,
+      searchHighlightColor: editorState.editorStyle.searchHighlightColor,
       supportTypes: const [
         BlockSelectionType.block,
       ],
@@ -190,6 +193,7 @@ class ImageBlockComponentWidgetState extends State<ImageBlockComponentWidget>
         node: node,
         actionBuilder: widget.actionBuilder!,
         actionTrailingBuilder: widget.actionTrailingBuilder,
+        contentWrapper: widget.contentWrapper,
         child: child,
       );
     }
@@ -216,6 +220,7 @@ class ImageBlockComponentWidgetState extends State<ImageBlockComponentWidget>
                   remoteSelection: editorState.remoteSelections,
                   cursorColor: editorState.editorStyle.cursorColor,
                   selectionColor: editorState.editorStyle.selectionColor,
+                  searchHighlightColor: editorState.editorStyle.searchHighlightColor,
                   child: child!,
                 ),
                 if (value) widget.menuBuilder!(widget.node, this),

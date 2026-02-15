@@ -12,6 +12,13 @@ typedef BlockComponentActionTrailingBuilder = Widget Function(
   BlockComponentActionState state,
 );
 
+/// Function type for wrapping block content (excludes actions)
+typedef BlockContentWrapper = Widget Function(
+  BuildContext context, {
+  required Node node,
+  required Widget child,
+});
+
 class BlockComponentActionWrapper extends StatefulWidget {
   const BlockComponentActionWrapper({
     super.key,
@@ -19,12 +26,15 @@ class BlockComponentActionWrapper extends StatefulWidget {
     required this.child,
     required this.actionBuilder,
     this.actionTrailingBuilder,
+    this.contentWrapper,
   });
 
   final Node node;
   final Widget child;
   final BlockComponentActionBuilder actionBuilder;
   final BlockComponentActionTrailingBuilder? actionTrailingBuilder;
+  /// Optional wrapper applied only to block content (not actions)
+  final BlockContentWrapper? contentWrapper;
 
   @override
   State<BlockComponentActionWrapper> createState() =>
@@ -73,6 +83,16 @@ class _BlockComponentActionWrapperState
 
   @override
   Widget build(BuildContext context) {
+    // Apply contentWrapper only to the block content, not the actions
+    Widget content = widget.child;
+    if (widget.contentWrapper != null) {
+      content = widget.contentWrapper!(
+        context,
+        node: widget.node,
+        child: content,
+      );
+    }
+
     return MouseRegion(
       onEnter: (_) => showActionsNotifier.value = true,
       onExit: (_) => showActionsNotifier.value = alwaysShowActions || false,
@@ -96,7 +116,7 @@ class _BlockComponentActionWrapperState
               context,
               this,
             ),
-          Expanded(child: widget.child),
+          Expanded(child: content),
         ],
       ),
     );
